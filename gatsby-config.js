@@ -12,6 +12,9 @@ module.exports = {
     },
   },
   plugins: [
+    `gatsby-plugin-postcss`,
+    `gatsby-plugin-dark-mode`,
+    `gatsby-plugin-catch-links`,
     {
       resolve: `gatsby-plugin-typegen`,
       options: {
@@ -56,9 +59,9 @@ module.exports = {
           },
           {
             resolve: "gatsby-remark-shiki-twoslash",
-            options: {
-              theme: require.resolve("./src/styles/typescript-beta-light.json"),
-            },
+            // options: {
+            //   theme: require.resolve("./src/styles/typescript-beta-light"),
+            // },
           },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
@@ -67,12 +70,6 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
-      },
-    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

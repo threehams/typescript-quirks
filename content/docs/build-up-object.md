@@ -5,12 +5,6 @@ description: When you want to add properties to an object conditionally, the usu
 
 # Building Up an Object (Limitation)
 
-## Related Issues
-
-diagnostic codes: ts2339, ts2741
-
-[Issue #9998: Tradeoffs in Control Flow Analysis](https://github.com/Microsoft/TypeScript/issues/9998)
-
 ## The Problem
 
 Sometimes, you need to initialize an object and add properties one by one, often with a check each time.
@@ -52,6 +46,22 @@ const addAssertion = (name?: string): Result => {
 
 ## What do I do about it?
 
+Do as much as possible in one line.
+
+```tsx
+interface Result {
+  name?: string;
+  value: string | number;
+}
+
+const oneLine = (name?: string) => {
+  const result: Result = { value: 1 };
+  if (name) {
+    result.name = name;
+  }
+};
+```
+
 For simple cases, just have two returns.
 
 ```tsx
@@ -77,7 +87,7 @@ buildResult = (name?: string): Result => {
 };
 ```
 
-...or use a utility.
+...or use a utility to filter out nullish/empty values.
 
 ```tsx
 // remember keys + entries and open types:
@@ -109,3 +119,7 @@ buildResult = (name?: string): Result => {
   });
 };
 ```
+
+## Related Issues
+
+[Issue #9998: Tradeoffs in Control Flow Analysis](https://github.com/Microsoft/TypeScript/issues/9998)

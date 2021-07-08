@@ -1,8 +1,6 @@
 // custom typefaces
-import "typeface-montserrat";
-import "typeface-merriweather";
-// normalize CSS across browsers
-import "./src/normalize.css";
+import "@fontsource/roboto";
+import "@fontsource/ibm-plex-mono";
 // custom CSS styles
 import "./src/style.css";
 

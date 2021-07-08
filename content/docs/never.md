@@ -3,7 +3,7 @@ title: The Never Type
 description: Where did this `never[]` come from?
 ---
 
-The `never` type is a condition which should never happen. This most commonly happens when a function throws an error, or when if/else/switch/case runs out of options and hits an `else` or `default` case.
+The `never` type is what's left after all other possibilities have been [narrowed down](/docs/narrowing). This most commonly happens when a function throws an error, or when if/else/switch/case runs out of options and hits an `else` or `default` case.
 
 ```ts twoslash
 function fn(x: string | number): string {
@@ -12,6 +12,7 @@ function fn(x: string | number): string {
   } else if (typeof x === "number") {
     return x.toString();
   }
+  // We've narrowed out string and number, so all that's left is never
   return x;
 }
 ```
@@ -19,19 +20,12 @@ function fn(x: string | number): string {
 Functions which throw will always have a `never` return type.
 
 ```ts twoslash
-function fail(msg: string): never {
+function fail(msg: string) {
   throw new Error(msg);
 }
 ```
 
-The other time you'll see `never` is when creating a new empty array, when
-noImplicityAny is set to `false`. It is unlikely you will see this, but the
-type defaults to `never[]` to prevent it from being inferred as `any[]`.
-Simple fix: give it a type, or set `noImplicitAny` to true.
-https://github.com/microsoft/TypeScript/pull/8944
-
-Sometimes `never[]` is really a symptom of another error. Here's a case where
-a type is expecting an object, but we give it an array:
+The other time you'll see `never` when it's really a symptom of another error. Here's a case where a type is expecting an object, but we give it an array:
 
 ```ts twoslash
 // @errors: 2739

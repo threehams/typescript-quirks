@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, graphql, PageProps } from "gatsby";
 
-import Bio from "../components/bio";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
 
@@ -12,8 +11,7 @@ const BlogIndex = ({ data }: PageProps<GatsbyTypes.BlogQuery>) => {
   return (
     <Layout title={siteTitle}>
       <Seo title="All posts" />
-      <Bio />
-      <ol style={{ listStyle: `none` }}>
+      <ol>
         {posts.map((post) => {
           const title = post.frontmatter?.title || post.fields?.slug;
 
